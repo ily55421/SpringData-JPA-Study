@@ -1,6 +1,7 @@
 package com.example.jpaexample.service.impl;
 
 import com.example.jpaexample.service.BaseService;
+import com.example.jpaexample.util.GenericsUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +33,7 @@ public class BaseServiceImpl<T, ID, R extends JpaRepository<T, ID>>
         Class thisClass = getClass();
         Class<T> domainClass = DOMAIN_CLASS_CACHE.get(thisClass);
         if (Objects.isNull(domainClass)) {
-//            domainClass = GenericsUtils.getGenericClass(thisClass, 0);
+            domainClass = GenericsUtils.getGenericClass(thisClass, 0);
             DOMAIN_CLASS_CACHE.putIfAbsent(thisClass, domainClass);
         }
         return domainClass;
